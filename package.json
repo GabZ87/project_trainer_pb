@@ -1,0 +1,14 @@
+{
+  "name": "project_trainer",
+  "version": "1.0.0",
+  "description": "a test project for qa",
+  "main": "index.js",
+  "scripts": {
+    "e2e": "npx cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^14.5.4"
+  }
+}
