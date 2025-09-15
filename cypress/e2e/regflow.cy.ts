@@ -11,9 +11,12 @@
 // verify the loan was approved
 // verify the new loan appears in the accounts overview page
 
+import { userFactory } from '../support/utils/user-factory';
 describe('Register user and save details', () => {
   before(() => {
     //use login.cy.ts to register a new user and save details
+    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
+    const newUser = userFactory();
     cy.registerUser().then((user) => {
       cy.wrap(user).as('newUser');
     });

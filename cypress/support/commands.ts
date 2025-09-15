@@ -26,63 +26,46 @@
 
 import { faker } from '@faker-js/faker';
 import { userData } from '../fixtures/testdata';
+import { User } from './types/user';
 
-function registerUserHelper(): Cypress.Chainable<{ [key: string]: string }> {
-  const randomNum = Math.floor(Math.random() * 10000);
-  const randomString = faker.string.alphanumeric(3);
-  const firstName = faker.person.firstName();
-  const lastName = faker.person.lastName();
-  const username = `${firstName}${lastName}${randomNum}${randomString}`;
-  const password = faker.internet.password({ length: 12 });
-  const user: { [key: string]: string } = {
-    firstName,
-    lastName,
-    address: faker.location.streetAddress(),
-    city: faker.location.city(),
-    state: faker.location.state(),
-    zipCode: faker.location.zipCode(),
-    phoneNumber: faker.phone.number(),
-    ssn: faker.string.alphanumeric(9),
-    username,
-    password
-  };
+// below is registerUser command
 
-  cy.visit('https://parabank.parasoft.com/parabank/index.htm');
+import { userFactory } from '../support/utils/user-factory';
+
+function registerUserHelper() {
+  const newUser = userFactory();
   cy.get('input.button').contains('Log In').should('exist');
   cy.get('a').contains('Register').should('be.visible').click();
 
   Object.values(userData).forEach((field: { input: string; type: string }) => {
-    cy.get(`input[id="${field.input}"]`).type(user[field.type]);
+    cy.get(`input[id="${field.input}"]`).type((newUser as any)[field.type]);
   });
 
   cy.get('input.button').contains('Register').click();
 
-  return cy.get('body').then($body => {
+  cy.get('body').then($body => {
     if ($body.text().includes('This username already exists.')) {
       cy.log('Username exists, retrying registration...');
-      return registerUserHelper(); // Recursively try again with a new user
+      registerUserHelper();
     } else {
-      cy.writeFile(`cypress/fixtures/userlogin/${username}.json`, user);
       cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
-      return cy.wrap(user);
     }
   });
 }
 
-// above is registerUser code
-// below is registerUser command
-
 Cypress.Commands.add('registerUser', () => {
-  return registerUserHelper();
+  registerUserHelper();
 });
+//   cy.get('input.button').contains('Log In').should('exist');
+//   cy.get('a').contains('Register').should('be.visible').click();
 
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      registerUser(): Chainable<{ [key: string]: string }>;
-    }
-  }
-}
+//     Object.values(userData).forEach((field: { input: string; type: string }) => {
+//     cy.get(`input[id="${field.input}"]`).type(user[field.type]);
+//   });
+
+//   cy.get('input.button').contains('Register').click();
+// });
+
 
 // above is registerUser command
 // below is login command
