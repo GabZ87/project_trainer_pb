@@ -1,3 +1,5 @@
+import { User } from "../support/types/user";
+
 interface MenuItem {
     url: string;
     title: string;
