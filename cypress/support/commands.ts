@@ -29,15 +29,6 @@ import { userData } from '../fixtures/testdata';
 import { User } from '../support/types/user';
 import { userFactory } from '../support/utils/user-factory';
 
-// Extend Cypress' Chainable interface to include the custom command
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      registerUser(user: User): Chainable<User>;
-    }
-  }
-}
-
 function registerUserHelper(): Cypress.Chainable<User> {
   const newUser = userFactory();
   cy.get('input.button').contains('Log In').should('exist');
@@ -60,6 +51,6 @@ function registerUserHelper(): Cypress.Chainable<User> {
   });
 }
 
-Cypress.Commands.add('registerUser', (user: User) => {
+Cypress.Commands.add('registerUser', () => {
   return registerUserHelper();
 });

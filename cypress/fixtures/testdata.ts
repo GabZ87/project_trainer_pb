@@ -1,8 +1,10 @@
-import { User } from "../support/types/user";
-
 interface MenuItem {
     url: string;
     title: string;
+}
+
+interface AccountMenuItem extends MenuItem {
+    page: string;
 }
 
 const leftMenuItems: Record<string, MenuItem> = {
@@ -83,7 +85,50 @@ Contact: {
 
 }
 
-interface UserField {
+const accountMenuItems: Record<string, AccountMenuItem> = {
+    NewAccount: {
+        url: 'openaccount.htm',
+        title: 'Open New Account',
+        page: 'Open New Account'
+    },
+    AccountsOverview: {
+        url: 'overview.htm',
+        title: 'Accounts Overview',
+        page: 'Accounts Overview'
+    },
+    TransferFunds: {
+        url: 'transfer.htm',
+        title: 'Transfer Funds',
+        page: 'Transfer Funds'
+    },
+    BillPay: {
+        url: 'billpay.htm',
+        title: 'Bill Pay',
+        page: 'Bill Payment Service'
+    },
+    FindTransactions: {
+        url: 'findtrans.htm',
+        title: 'Find Transactions',
+        page: 'Find Transactions'
+    },
+    UpdateContactInfo: {
+        url: 'updateprofile.htm',
+        title: 'Update Contact Info',
+        page: 'Update Profile'
+    },
+    RequestLoan: {
+        url: 'requestloan.htm',
+        title: 'Request Loan',
+        page: 'Apply for a Loan'
+    },
+    LogOut: {
+        url: 'logout.htm',
+        title: 'Log Out',
+        page: '?' //back to home page
+    }
+}
+
+    interface UserField {
     input: string;
     type: string;
 }
@@ -147,4 +192,6 @@ repeatPassword: {
 
 }
 
-export { leftMenuItems, footerMenuItems, homeMenuItems, userData };
+
+
+export { leftMenuItems, footerMenuItems, homeMenuItems, accountMenuItems, userData };
