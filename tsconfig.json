@@ -6,7 +6,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "outDir": "./dist",
     "strict": true,
@@ -14,6 +14,6 @@
   },
   "include": [
     "cypress/**/*.ts",
-    "cypress/support/global.d.ts"
+    //"cypress/support/global.d.ts"
   ]
 }
