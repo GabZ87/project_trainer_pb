@@ -27,11 +27,18 @@
 
 import { userData } from '../fixtures/testdata';
 import { User } from '../support/types/user';
-// below is registerUser command
-
 import { userFactory } from '../support/utils/user-factory';
 
-function registerUserHelper() {
+// Extend Cypress' Chainable interface to include the custom command
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      registerUser(user: User): Chainable<User>;
+    }
+  }
+}
+
+function registerUserHelper(): Cypress.Chainable<User> {
   const newUser = userFactory();
   cy.get('input.button').contains('Log In').should('exist');
   cy.get('a').contains('Register').should('be.visible').click();
@@ -42,17 +49,17 @@ function registerUserHelper() {
 
   cy.get('input.button').contains('Register').click();
 
-  cy.get('body').then($body => {
+  return cy.get('body').then($body => {
     if ($body.text().includes('This username already exists.')) {
       cy.log('Username exists, retrying registration...');
-      // Recursively try again
-      registerUserHelper();
+      return registerUserHelper();
     } else {
       cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
+      return cy.wrap(newUser);
     }
   });
 }
 
-Cypress.Commands.add('registerUser', () => {
+Cypress.Commands.add('registerUser', (user: User) => {
   return registerUserHelper();
 });

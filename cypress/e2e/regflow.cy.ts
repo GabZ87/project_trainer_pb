@@ -16,8 +16,7 @@ describe('Register user and save details', () => {
   before(() => {
     //use login.cy.ts to register a new user and save details
     cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-    const newUser = userFactory();
-    cy.registerUser().then((user) => {
+      cy.registerUser().then((user) => {
       cy.wrap(user).as('newUser');
     });
   });
