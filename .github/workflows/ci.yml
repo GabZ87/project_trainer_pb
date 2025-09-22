@@ -42,10 +42,10 @@ jobs:
     # 6. Start the app and run Cypress tests
     - name: Run Cypress tests
       uses: cypress-io/github-action@v6
-      with:
-        start: npm start
-        wait-on: http://localhost:3000
-        wait-on-timeout: 60
+    #   with:
+    #     start: npm start
+    #     wait-on: http://localhost:3000
+    #     wait-on-timeout: 60
     # 7. Upload Cypress screenshots (if any)
     - name: Upload Cypress screenshots
       if: failure()
