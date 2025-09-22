@@ -6,7 +6,8 @@
   "scripts": {
     "e2e": "npx cypress open",
     "lint": "eslint . --ext .ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
