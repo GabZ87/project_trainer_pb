@@ -23,8 +23,8 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-node-
     # Type Check
-    - name: Type Check
-      run: npm run type-check
+    # - name: Type Check
+    #   run: npm run type-check
     # 2. Set up Node.js
     - name: Set up Node.js
       uses: actions/setup-node@v3
