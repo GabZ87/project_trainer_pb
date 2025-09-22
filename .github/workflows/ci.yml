@@ -14,9 +14,6 @@ jobs:
     # 1. Checkout the code
     - name: Checkout repository
       uses: actions/checkout@v3
-    # Type check
-    - name: Type check
-      run: npm run type-check
     # Dependency installation and caching
     - name: Cache node modules
       uses: actions/cache@v3

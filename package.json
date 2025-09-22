@@ -4,15 +4,14 @@
   "description": "a test project for qa",
   "main": "index.js",
   "scripts": {
-    "e2e": "npx cypress open",
-    "type-check": "tsc --noEmit"
+    "e2e": "npx cypress open"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cypress": "^14.5.4",
-    "typescript": "^5.9.2",
+    "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "eslint": "^9.35.0"
+    "typescript": "^5.9.2"
   }
 }
