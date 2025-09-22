@@ -12,18 +12,15 @@
 // verify the new loan appears in the accounts overview page
 
 import { userFactory } from '../support/utils/user-factory';
+
 describe('Register user and save details', () => {
-  before(() => {
-    //use login.cy.ts to register a new user and save details
-    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-      cy.registerUser().then((user) => {
-      cy.wrap(user).as('newUser');
-    });
-  });
+  beforeEach(() => {
+        const user = userFactory();
+        cy.registerUser(user);
+      });
 
-    it('should be logged in with the newly registered user and verify account creation, request loans and verify loan status', function() {
+    it('should be logged in with the newly registered user and verify account creation, request loans and verify loan status', () => {
 
-        cy.get('@newUser').then((user: any) => {
         cy.get('a').contains('Accounts Overview').should('be.visible').click();
         cy.get('#accountTable tbody tr').first().find('td').first().should('be.visible').then($accountCell => {
           const accountNumber = $accountCell.text().trim();
@@ -69,7 +66,4 @@ describe('Register user and save details', () => {
         });
       });
     });
-    });
 });
-
-

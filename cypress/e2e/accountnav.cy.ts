@@ -1,10 +1,14 @@
 
 import {accountMenuItems} from '../fixtures/testdata';
+import { userFactory } from '../support/utils/user-factory';
 
 describe('Navigation Tests', () => {
   beforeEach(() => {
     cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-    cy.registerUser()
+    const user = userFactory();
+        cy.registerUser(user);
+        cy.wrap(user).as('newUser');
+      });
   });
 
     it('account navigation buttons exist and are functional', () => {
@@ -25,4 +29,3 @@ describe('Navigation Tests', () => {
         }
       });
     });
-});
