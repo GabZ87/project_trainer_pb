@@ -4,7 +4,8 @@
   "description": "a test project for qa",
   "main": "index.js",
   "scripts": {
-    "e2e": "npx cypress open"
+    "e2e": "npx cypress open",
+    "type-check": "tsc --noEmit"
   },
   "author": "",
   "license": "ISC",
