@@ -23,3 +23,34 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+import { userData } from '../fixtures/testdata';
+import { User } from '../support/types/user';
+import { userFactory } from '../support/utils/user-factory';
+
+function registerUserHelper(): Cypress.Chainable<User> {
+  const newUser = userFactory();
+  cy.get('input.button').contains('Log In').should('exist');
+  cy.get('a').contains('Register').should('be.visible').click();
+
+  Object.values(userData).forEach((field: { input: string; type: string }) => {
+    cy.get(`input[id="${field.input}"]`).type((newUser as any)[field.type]);
+  });
+
+  cy.get('input.button').contains('Register').click();
+
+  return cy.get('body').then($body => {
+    if ($body.text().includes('This username already exists.')) {
+      cy.log('Username exists, retrying registration...');
+      return registerUserHelper();
+    } else {
+      cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
+      return cy.wrap(newUser);
+    }
+  });
+}
+
+Cypress.Commands.add('registerUser', () => {
+  return registerUserHelper();
+});
