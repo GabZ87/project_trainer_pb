@@ -11,13 +11,15 @@
 // verify the loan was approved
 // verify the new loan appears in the accounts overview page
 
-import { userFactory } from '../support/utils/user-factory';
+import { userFactory } from "../support/utils/user-factory";
 
 describe('Register user and save details', () => {
-  beforeEach(() => {
-        const user = userFactory();
-        cy.registerUser(user);
-      });
+  before(() => {
+    //use login.cy.ts to register a new user and save details
+      const user = userFactory();
+      cy.registerUser(user);
+    });
+  });
 
     it('should be logged in with the newly registered user and verify account creation, request loans and verify loan status', () => {
 
@@ -66,4 +68,3 @@ describe('Register user and save details', () => {
         });
       });
     });
-});

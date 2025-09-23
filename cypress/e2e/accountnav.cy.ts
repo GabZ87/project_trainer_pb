@@ -4,10 +4,8 @@ import { userFactory } from '../support/utils/user-factory';
 
 describe('Navigation Tests', () => {
   beforeEach(() => {
-    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-    const user = userFactory();
+        const user = userFactory();
         cy.registerUser(user);
-        cy.wrap(user).as('newUser');
       });
   });
 
