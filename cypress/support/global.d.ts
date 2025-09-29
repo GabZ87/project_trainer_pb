@@ -4,6 +4,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       registerUser(user: User): Chainable<void>;
+      login(user: User): Chainable<void>;
     }
   }
 }

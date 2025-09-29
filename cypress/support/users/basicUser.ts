@@ -6,7 +6,7 @@ const basicUser: User = {
     address: '123 MG Road',
     city: 'Mumbai',
     state: 'British India',
-    zipCode: 'Bengaluru 560038',
+    zipCode: '560038',
     phoneNumber: '07764466246',
     ssn: '159 1478 3698',
     username: 'TheKiplinator69',
