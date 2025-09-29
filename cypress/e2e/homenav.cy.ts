@@ -3,11 +3,7 @@
 import {leftMenuItems, footerMenuItems, homeMenuItems} from '../fixtures/testdata';
 
 describe('Navigation Tests', () => {
-  beforeEach(() => {
-    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-  });
-
-    it('navigation buttons exist and are functional', () => {
+      it('navigation buttons exist and are functional', () => {
       Object.values(leftMenuItems).forEach((item: { title: string; url: string }) => {
         cy.get('ul.leftmenu')
         .find(`a:contains("${item.title}")`)
