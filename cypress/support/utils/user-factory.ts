@@ -2,8 +2,7 @@ import { faker } from '@faker-js/faker';
 import { User } from '../types/user';
 
 export const userFactory = (): User => {
-  const randomNum: number = Math.floor(Math.random() * 10000);
-  const randomString: string = faker.string.alphanumeric(3);
+  const date: number = Date.now();
   const firstName: string = faker.person.firstName();
   const lastName: string = faker.person.lastName();
 
@@ -16,7 +15,7 @@ export const userFactory = (): User => {
     zipCode: faker.location.zipCode(),
     phoneNumber: faker.phone.number(),
     ssn: faker.string.alphanumeric(9), // Social Security Number
-    username: `${firstName}${lastName}${randomNum}${randomString}`,
+    username: `${firstName}${lastName}${date}`.slice(0, 20),
     password: faker.internet.password({ length: 12 })
   };
 

@@ -5,6 +5,6 @@ export default defineConfig({
     setupNodeEvents(on: any, config: any) {
       // implement node event listeners here
     },
-    //baseUrl: 'https://parabank.parasoft.com/parabank/index.htm',
+    baseUrl: 'https://parabank.parasoft.com/parabank/index.htm',
   },
 });
