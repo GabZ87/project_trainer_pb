@@ -11,9 +11,6 @@ describe('Navigation Tests', () => {
         cy.get('#leftPanel')
         .contains('a', item.title)
         .should('have.attr', 'href', item.url)
-        // .find(`a:contains("${item.title}")`)
-        // .should('have.attr', 'href')
-        // .and('include', item.url)
         .click();
 
         if (item.page === '?') {
