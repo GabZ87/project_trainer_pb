@@ -3,13 +3,10 @@ import {accountMenuItems} from '../fixtures/testdata';
 import { userFactory } from '../support/utils/user-factory';
 
 describe('Navigation Tests', () => {
-  beforeEach(() => {
-        const user = userFactory();
-        cy.registerUser(user);
-      });
-  });
-
+  
     it('account navigation buttons exist and are functional', () => {
+      const user = userFactory();
+      cy.registerUser(user);
       Object.values(accountMenuItems).forEach((item: { title: string; url: string; page: string; }) => {
         cy.get('#leftPanel')
         .contains('a', item.title)
@@ -27,3 +24,4 @@ describe('Navigation Tests', () => {
         }
       });
     });
+  });
