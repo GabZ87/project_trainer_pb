@@ -1,19 +1,12 @@
-import { faker } from '@faker-js/faker';
-import {userData} from '../fixtures/testdata';
-import { userFactory } from '../support/utils/user-factory';
-import { User } from '../support/types/user';
-
+import { basicUser } from '../support/users/basicUser';
 
 describe('Register user and save details', () => {
-  beforeEach(() => {
-    cy.visit('https://parabank.parasoft.com/parabank/index.htm');
-  });
-
-  it('should register with details', () => {
-    cy.registerUser().then((user) => {
-      cy.writeFile(`cypress/fixtures/userlogin/${user.username}.json`, user);
-      cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
-      cy.get('a').contains('Log Out').should('be.visible').click();
-    });
+  it('should login with basic user details', () => {
+    const user = basicUser;
+    cy.get('input[name="username"]').type(user.username);
+    cy.get('input[name="password"]').type(user.password);
+    cy.get('input.button[type="submit"]').click();
+    cy.get('body').should('contain.text', `Welcome ${user.firstName} ${user.lastName}`);
+    cy.get('a').contains('Log Out').should('be.visible').click();
   });
 });

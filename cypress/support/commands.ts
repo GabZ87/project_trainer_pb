@@ -24,42 +24,33 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
-import { userData } from '../fixtures/testdata';
 import { User } from '../support/types/user';
-import { userFactory } from '../support/utils/user-factory';
 
-// Extend Cypress' Chainable interface to include the custom command
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      registerUser(user: User): Chainable<User>;
-    }
-  }
-}
-
-function registerUserHelper(): Cypress.Chainable<User> {
-  const newUser = userFactory();
+Cypress.Commands.add('registerUser', (user: User) => {
   cy.get('input.button').contains('Log In').should('exist');
   cy.get('a').contains('Register').should('be.visible').click();
 
-  Object.values(userData).forEach((field: { input: string; type: string }) => {
-    cy.get(`input[id="${field.input}"]`).type((newUser as any)[field.type]);
-  });
+  cy.get(`input[id="customer.firstName"]`).type(user.firstName);
+  cy.get(`input[id="customer.lastName"]`).type(user.lastName);
+  cy.get(`input[id="customer.address.street"]`).type(user.address);
+  cy.get(`input[id="customer.address.city"]`).type(user.city);
+  cy.get(`input[id="customer.address.state"]`).type(user.state);
+  cy.get(`input[id="customer.address.zipCode"]`).type(user.zipCode);
+  cy.get(`input[id="customer.phoneNumber"]`).type(user.phoneNumber);
+  cy.get(`input[id="customer.ssn"]`).type(user.ssn);
+  cy.get(`input[id="customer.username"]`).type(user.username);
+  cy.get(`input[id="customer.password"]`).type(user.password);
+  cy.get(`input[id="repeatedPassword"]`).type(user.password);
 
   cy.get('input.button').contains('Register').click();
 
-  return cy.get('body').then($body => {
+  cy.get('body').then($body => {
     if ($body.text().includes('This username already exists.')) {
-      cy.log('Username exists, retrying registration...');
-      return registerUserHelper();
-    } else {
+      cy.log('Registration failed.');
+      throw new Error('Username already exists. Please try again with a different username.');
+          } else {
       cy.contains('Your account was created successfully. You are now logged in.').should('be.visible');
-      return cy.wrap(newUser);
+      cy.log('Registration successful.');
     }
   });
-}
-
-Cypress.Commands.add('registerUser', (user: User) => {
-  return registerUserHelper();
 });
