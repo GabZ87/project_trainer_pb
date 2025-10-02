@@ -3,7 +3,7 @@ import { userFactory } from "../support/utils/user-factory";
 describe('Register user and save details', () => {
 
     it('should be logged in with the newly registered user and verify account creation, request loans and verify loan status', () => {
-
+      
       const user = userFactory();
       cy.registerUser(user);
 
