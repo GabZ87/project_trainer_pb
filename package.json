@@ -4,14 +4,22 @@
   "description": "a test project for qa",
   "main": "index.js",
   "scripts": {
-    "e2e": "npx cypress open"
+    "e2e": "npx cypress open",
+    "lint": "eslint . --ext .ts --config eslint.config.mjs",
+    "type-check": "tsc --noEmit",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cypress": "^14.5.4",
-    "typescript": "^5.9.2",
+    "eslint": "^9.35.0",
     "prettier": "^3.6.2",
-    "eslint": "^9.35.0"
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1"
   }
 }
