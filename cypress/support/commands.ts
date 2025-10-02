@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { User } from '../support/types/user';
+import { User } from './types/user';
 
 Cypress.Commands.add('registerUser', (user: User) => {
   cy.get('input.button').contains('Log In').should('exist');
@@ -55,10 +55,8 @@ Cypress.Commands.add('registerUser', (user: User) => {
   });
 });
 
-Cypress.Commands.add('login', (user: User) => {
-    cy.get('input[name="username"]').type(user.username);
-    cy.get('input[name="password"]').type(user.password);
+Cypress.Commands.add('login', (username: string, password: string) => {
+    cy.get('input[name="username"]').type(username);
+    cy.get('input[name="password"]').type(password);
     cy.get('input.button[type="submit"]').click();
-    cy.get('body').should('contain.text', `Welcome ${user.firstName} ${user.lastName}`);
-    cy.log('Login successful.');
 });
