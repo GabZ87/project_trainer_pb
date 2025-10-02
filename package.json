@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "e2e": "npx cypress open",
-    "lint": "eslint . --ext .ts --config eslint.config.js",
+    "lint": "eslint . --ext .ts --config eslint.config.mjs",
     "type-check": "tsc --noEmit",
     "build": "tsc"
   },
