@@ -10,10 +10,10 @@
     "checkJs": false,
     "outDir": "./dist",
     "strict": true,
+    "noImplicitAny": true,
     "skipLibCheck": true
   },
   "include": [
     "cypress/**/*.ts",
-    //"cypress/support/global.d.ts"
   ]
 }

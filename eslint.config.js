@@ -1,6 +1,6 @@
 module.exports = [
   {
-    files: ['**/*.ts'],
+    files: ['cypress/e2e/**/*.ts', 'cypress/support/**/*.ts'],
     languageOptions: {
       parser: require('@typescript-eslint/parser'),
     },
@@ -8,7 +8,7 @@ module.exports = [
       '@typescript-eslint': require('@typescript-eslint/eslint-plugin'),
     },
     rules: {
-      // Example: 'semi': ['error', 'always']
+      '@typescript-eslint/no-explicit-any': 'error',
     },
   },
 ];
